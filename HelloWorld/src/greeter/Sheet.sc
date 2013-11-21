@@ -1,7 +1,7 @@
 package greeter
 
 object Sheet {
-  val x = 1                                       //> x  : Int = 1
+  val x = 5                                       //> x  : Int = 5
   def increase(i: Int) = i + 1                    //> increase: (i: Int)Int
-  increase(x)                                     //> res0: Int = 2
+  increase(x)                                     //> res0: Int = 6
 }
