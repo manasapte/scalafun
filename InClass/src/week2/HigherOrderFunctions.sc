@@ -30,4 +30,24 @@ object HigherOrderFunctions {
                                                   //> summation: (f: Int => Int, l: Int, h: Int)Int
   summation(fact, 1, 5)                           //> res3: Int = 153
   summation(cube, 3, 5)                           //> res4: Int = 216
+  //Now let's rewrite the summation call using anonymous functions
+  def sumIntsNew(l: Int, h: Int): Int = summation((x: Int) => x*x*x, l, h)
+                                                  //> sumIntsNew: (l: Int, h: Int)Int
+  def sumCubesNew(l: Int, h: Int): Int = summation((x: Int) => x*x*x,l,h)
+                                                  //> sumCubesNew: (l: Int, h: Int)Int
+  sumCubesNew(3, 5)                               //> res5: Int = 216
+  sumInts(1, 5)                                   //> res6: Int = 15
+  // Now let's rewrite summation using tail recursion:
+  def sum(f: Int=>Int)(l: Int, h: Int) = {
+    def sum_tailrec(l: Int, partsum: Int): Int = {
+    	if(l > h) partsum else sum_tailrec(l+1, partsum + f(l))
+    }
+    sum_tailrec(l, 0)
+  }                                               //> sum: (f: Int => Int)(l: Int, h: Int)Int
+  /* Partially apply sum now by following the function application with _
+  *  this is beautiful, composing new functions using the existing higher order functions
+  *  and partial applications
+  */
+  def sum_ints(a: Int, b: Int) = sum(x => x)_     //> sum_ints: (a: Int, b: Int)(Int, Int) => Int
+    
 }
