@@ -77,5 +77,5 @@ class Rational(x: Int, y: Int) {
   def numer = x / g
   def denom = y / g
   def less(that: Rational) = this.numer * that.denom < this.denom * that.numer
-  def max(that: Rational) = if(that.less(that)) that else this
+  def max(that: Rational) = if(this.less(that)) that else this
 }
