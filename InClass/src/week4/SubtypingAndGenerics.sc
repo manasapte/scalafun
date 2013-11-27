@@ -17,8 +17,16 @@ object SubtypingAndGenerics {
    *  assertAllPos(Empty): Empty
    *  assertAllPos(NonEmpty): NonEmpty
    *  the above definition : assertAllPos(s: IntSet): IntSet does not capture this
+   *  one way to do this is: def assertAllPos[S <: IntSet](r: S): S = ...
    */
    
    
    // Variance --> how parameterized types behave under subtyping
+  /**
+   *  covariance:
+   *  given S <: T List[S] <: List[T]
+   *
+   *
+   *
+   */
 }
