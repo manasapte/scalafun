@@ -1,5 +1,8 @@
 package week4
 import scala.Boolean
+import week3.Empty
+import week3.NonEmpty
+import week3.IntSet
 object Variance extends App {
 /**
  * Typing rules for functions:
@@ -35,27 +38,32 @@ object Variance extends App {
     def head: Nothing = throw new NoSuchElementException("Nil.head")
     def tail: Nothing = throw new NoSuchElementException("Nil.tail")
   }
-  
-  object test {
-    // Nothing is a subtype of string, and we have defined List to be covariant
-    // therefore list of Nothing is a subtype of list of String
-    val x: List[String] = Nil
-    /*
-     * some times we have to put in some work to make a type covariant.
-     * Let's add a prepend operation to list.
-     * prepend[T](elem: T) = new Cons(elem, this)
-     * Since list is covariant in T, it can not accept T as a function argument.
-     * Here's the problem
-     * var xs: List[IntSet] = new ...
-     * xs.prepend(Empty)
-     * but then on 
-     * var ys: List[NonEmpty] = new ...
-     * ys.prepend(Empty) -- Fails and therefore, list is not covariant any more.
-     * to solve this we can use some super type of T
-     * So def prepend[U >: T](elem: T): List[U] = new Cons(elem, this) 
-     */
-     // what is the return type of the following:
-    def f(xs: List[NonEmpty], y: Empty) = xs.prepend(y)
-  }
+
+  // Nothing is a subtype of string, and we have defined List to be covariant
+  // therefore list of Nothing is a subtype of list of String
+  val x: List[String] = Nil
+  /*
+   * some times we have to put in some work to make a type covariant.
+   * Let's add a prepend operation to list.
+   * prepend[T](elem: T) = new Cons(elem, this)
+   * Since list is covariant in T, it can not accept T as a function argument.
+   * Here's the problem
+   * var xs: List[IntSet] = new ...
+   * xs.prepend(Empty)
+   * but then on 
+   * var ys: List[NonEmpty] = new ...
+   * ys.prepend(Empty) -- Fails and therefore, list is not covariant any more.
+   * to solve this we can use some super type of T
+   * So def prepend[U >: T](elem: T): List[U] = new Cons(elem, this) 
+   */
+  // What will be the return type of the following:
+  def function(xs: List[NonEmpty]) = xs.prepend(Empty)
+  /**
+   * It is List[IntSet]. When prepend is called, compiler tries to match Empty to one of the super types of NonEmpty.
+   * NonEmpty itself does not match, so it tries IntSet and that matches.
+   * So now it is operating as prepend(l: List[IntSet]): List[IntSet]
+   * Therefore the return type is List[IntSet]
+   */
+    
   
 }
