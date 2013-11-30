@@ -32,4 +32,19 @@ object HigherOrderListFunctions extends App {
      pack(xs).map(t => (t.head, t.length)) 
   }
   println(encode(List("a", "a", "a", "b", "c", "c", "a")))
+  
+// 3. combine: Complete the following definitions of the basic functions map and length on lists, such that their implementation uses foldRight:
+//  def mapFun[T, U](xs: List[T], f: T => U): List[U] =
+//    (xs foldRight List[U]())( ??? )
+//  def lengthFun[T](xs: List[T]): Int =
+//    (xs foldRight 0)( ??? )
+  def mapFun[T, U](xs: List[T], f: T => U): List[U] =
+    (xs foldRight List[U]())((x, y) => f(x) :: y)
+    
+  println("mapfun: " + mapFun[Int, Int](List(1, 2, 3, 4), x => x*x))
+  
+  def lengthFun[T](xs: List[T]): Int = 
+    (xs foldRight 0)((x, y) => 1 + y)
+  
+  println("lengthfun: " + lengthFun(List(1, 2, 3))
 }
