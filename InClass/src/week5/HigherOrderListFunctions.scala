@@ -46,5 +46,5 @@ object HigherOrderListFunctions extends App {
   def lengthFun[T](xs: List[T]): Int = 
     (xs foldRight 0)((x, y) => 1 + y)
   
-  println("lengthfun: " + lengthFun(List(1, 2, 3))
+  println("lengthfun: " + lengthFun(List(1, 2, 3)))
 }
